@@ -1,28 +1,22 @@
-body { background-color: #fff;}
-.container { padding-left: 300px;}
-.movies { margin: 15px; display: flex; justify-content: space-between;  flex-wrap: wrap; box-sizing: border-box; padding: 30px; background: #f0f0f0;}
-.header{ width: 300px; background: #fff; height: 100vh; position: fixed; left: 0; top: 0;}
 
-.loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
-.loading_circle { width: 130px; height: 30px; position: absolute; left: -50%; top: 0%; overflow: hidden; animation: ani .5s ease-in-out infinite;}
-.loading_circle > div { width: 30px; height: 30px; background: rgba(0, 68, 255, 0.5); border-radius: 50%;}
-.loading_circle > div:last-child{ float: right;}
-.loading_circle > div:first-child{ float: left;}
+.movie { position: relative; background: rgb(255, 255, 255); width: 47%; margin-bottom: 50px; margin-right: 40px; padding: 20px 20px 20px 200px; box-sizing: border-box; box-shadow: 4px 4px 10px 5px #a5a5a5; border-radius: 10px;}
+.movie:nth-child(2n) { margin-right: 0;}
+.movie_title { font-size: 30px; margin: 15px 0; font-size: 25px;}
+.movie_year { font-size: 20px; margin: 0; margin-bottom: 16px; }
+/* .movie_data { margin-bottom: 40px;} */
+.movie .genres li { display: inline-block; padding: 0 5px; color: rgb(90, 90, 90); font-size: 13px;}
+.movie .genres { padding: 0; margin: 0; }
+.movie .movie_summary {  max-height: 170px; overflow: hidden;}
+.movie > img { position: absolute; top: 25px; left: 25px; width: 160px;}
 
-@keyframes ani{
-    0% { transform: rotate(0deg);}
-    100% { transform: rotate(360deg);}
+@media (max-width: 1680px){
+    .movie .movie_title { font-size: 20px;}
 }
 
-
-@media (max-width: 1280px){
-    .movies { padding: 15px;}
-    .header { width: 230px;}
-    .container { padding-left: 230px;}
-}
-
-@media (max-width: 1024px){
-    .header { display: none;}
-    .container { padding-left: 0;}
-    .movies { position: static; }
+@media (max-width:1280px){
+    .movie {padding: 20px 20px 20px 160px; }
+    .movie .genres { padding: 0; margin: 8px 0;}
+    .movie .movie_summary { margin: 8px 0; font-size: 14px; max-height: 165px;}
+    .movie > img { width: 130px; top: 15px; left: 15px;}
+    
 }

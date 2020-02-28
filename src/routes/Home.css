@@ -1,0 +1,28 @@
+body { background-color: #fff;}
+.container { padding-left: 300px;}
+.movies { margin: 15px; display: flex; justify-content: space-between;  flex-wrap: wrap; box-sizing: border-box; padding: 30px; background: #f0f0f0;}
+.header{ width: 300px; background: #fff; height: 100vh; position: fixed; left: 0; top: 0;}
+
+.loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+.loading_circle { width: 130px; height: 30px; position: absolute; left: -50%; top: 0%; overflow: hidden; animation: ani .5s ease-in-out infinite;}
+.loading_circle > div { width: 30px; height: 30px; background: rgba(0, 68, 255, 0.5); border-radius: 50%;}
+.loading_circle > div:last-child{ float: right;}
+.loading_circle > div:first-child{ float: left;}
+
+@keyframes ani{
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+
+@media (max-width: 1280px){
+    .movies { padding: 15px;}
+    .header { width: 230px;}
+    .container { padding-left: 230px;}
+}
+
+@media (max-width: 1024px){
+    .header { display: none;}
+    .container { padding-left: 0;}
+    .movies { position: static; }
+}
