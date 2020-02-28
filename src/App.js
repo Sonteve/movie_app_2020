@@ -1,56 +1,49 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import axios from 'axios';
+import Movie from './components/Movie';
+import "./App.css";
+// import PropTypes from 'prop-types';
 
-const foodLike = [
-  {
-    id: 1,
-   name: "kimchi",
-   image: "https://i.ytimg.com/vi/iJzBe08Rtb8/hqdefault.jpg",
-   rating: 5
+class App extends Component {
+  state = {
+    isLoading: true,
+    movies: []
+  }
 
-  },
-  {
-    id: 2,
-    name: "ramen",
-    image: "https://i.ytimg.com/vi/-wa0umYJVGg/hqdefault.jpg",
-    rating: 2
-   },
-   {
-    id: 3,
-    name: "samgyeopsal",
-    image: "https://greenwalledtower.files.wordpress.com/2014/02/samgyeopsal.jpg",
-    rating: 4.9
-   },
-   {
-    id: 4,
-    name: "chukumi",
-    image: "http://3.bp.blogspot.com/-z_PjxY9_V7U/UW3pnJz6b-I/AAAAAAAAANQ/8SOJaFB43iw/s320/chukumi.jpg",
-    rating: 3.7
-   },
-];
-
-function Food({name,picture,rating}) {
-  const imgSize = '500px';
-  return (
-  <div>
-    <h1>I like {name}</h1>
-    <h4>{rating}/5</h4>
-    <img width={imgSize} src={picture} alt="food"/>
-  </div>
-  );
-}
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-}
-function App() {
-  
-  return (
-    <div>
-      {foodLike.map( dish => <Food name={dish.name} picture={dish.image} key={dish.id} rating={dish.rating}/>)}
-    </div>
-  );
+  getMovies = async () => {
+    const {data: {data:{movies}}} = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+    this.setState({ movies, isLoading: false });    
+  }
+  componentDidMount(){
+    this.getMovies();
+  }
+  render(){
+    const { isLoading, movies } = this.state;    
+    return (
+      <React.Fragment>
+      <div className="header"></div>
+      <section className="container">
+        { isLoading 
+        ? (
+          
+          <div className="loader">
+            <span className="loader_text">Loading...</span>
+            <div className="loading_circle">
+              <div></div>
+              <div></div>              
+            </div>
+          </div>
+        ) :  (
+          <div className="movies">
+            {movies.map( movie => 
+              (<Movie key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image} genres={movie.genres}/>)
+            )}
+          </div>
+        )}        
+      </section>
+      </React.Fragment>
+    );
+  }  
 }
 
 export default App;
